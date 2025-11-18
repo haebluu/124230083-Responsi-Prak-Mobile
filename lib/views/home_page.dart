@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product'),
+        title:  Text('Product'),
         backgroundColor: Color.fromRGBO(206, 1, 88, 1),
       ),
       body: productController.isLoading

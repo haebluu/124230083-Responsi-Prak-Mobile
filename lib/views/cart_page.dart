@@ -56,7 +56,10 @@ class CartPage extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text('Price: \$${product.price?.toStringAsFixed(2) ?? '-'}'), 
+                      subtitle: 
+                      Text('\$${product.price?.toStringAsFixed(2) ?? '-'}', 
+                        style: TextStyle(color: Color.fromRGBO(206, 1, 88, 1)),
+                        ), 
                       onTap: () {
                         Navigator.push(
                           context,

@@ -51,11 +51,11 @@ class DetailPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Text(
-                      'Price: \$${product.price!.toStringAsFixed(2)}',
+                      '\$${product.price!.toStringAsFixed(2)}',
                       style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 20,
                           fontStyle: FontStyle.italic,
-                          color: Colors.grey),
+                          color: Color.fromRGBO(206, 1, 88, 1),),
                     ),
                   ),
                 const SizedBox(height: 10),
@@ -109,14 +109,8 @@ class DetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // _buildInfoRow('Type', product.type),
-                // _buildInfoRow('Episodes', product.episodes?.toString()),
-                // _buildInfoRow('Rating', product.rating),
-                // _buildInfoRow('Status', product.status),
-                // _buildInfoRow('Year', product.year?.toString()),
-                // _buildInfoRow('Genres', product.genres.join(', ')),
 
-                const SizedBox(height: 20),
+                //const SizedBox(height: 20),
 
                 const Text(
                   'Description',
@@ -132,29 +126,6 @@ class DetailPage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildInfoRow(String label, String? value) {
-    if (value == null || value.isEmpty || value == '0')
-      return const SizedBox.shrink();
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 80,
-            child: Text(
-              '$label:',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child: Text(value),
-          ),
-        ],
-      ),
     );
   }
 }
