@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefService {
   static const String _sessionKey = 'sessionUsername';
-  static const String _favoritesKey = 'favoritesAnime';
+  static const String _favoritesKey = 'favoritesProduct';
   static const String _profileImageKey = 'profileImagePath';
 
   Future<void> saveSession(String username) async {

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../models/anime_model.dart';
+import '../models/product_model.dart';
 import '../controllers/favorite_controller.dart';
 
 class DetailPage extends StatelessWidget {
-  final AnimeModel anime;
-  const DetailPage({super.key, required this.anime});
+  final ProductModel product;
+  const DetailPage({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     final favoriteController = Provider.of<FavoriteController>(context);
-    final isFavorite = favoriteController.isFavorite(anime.malId);
+    final isFavorite = favoriteController.isFavorite(product.malId);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(anime.title),
+        title: Text(product.title),
         backgroundColor: Color.fromRGBO(206, 1, 88, 1),
         actions: [
           IconButton(
@@ -24,7 +24,7 @@ class DetailPage extends StatelessWidget {
               color: isFavorite ? Colors.red : Colors.white,
             ),
             onPressed: () {
-              favoriteController.toggleFavorite(anime);
+              favoriteController.toggleFavorite(product);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(isFavorite
@@ -45,7 +45,7 @@ class DetailPage extends StatelessWidget {
             // --- Poster dan Judul ---
             Center(
               child: CachedNetworkImage(
-                imageUrl: anime.imageUrl,
+                imageUrl: product.image,
                 height: 300,
                 fit: BoxFit.cover,
                 placeholder: (context, url) =>
@@ -55,14 +55,14 @@ class DetailPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              anime.title,
+              product.title,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            if (anime.titleEnglish != null && anime.titleEnglish!.isNotEmpty)
+            if (product.price != null )
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
                 child: Text(
-                  anime.titleEnglish!,
+                  product.price! as String,
                   style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.grey),
                 ),
               ),
@@ -76,7 +76,7 @@ class DetailPage extends StatelessWidget {
                   const Icon(Icons.star, color: Colors.amber, size: 26),
                   const SizedBox(width: 5),
                   Text(
-                    ' ${anime.score.toStringAsFixed(2)}',
+                    ' ${product.rate!.toStringAsFixed(2)}',
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -90,23 +90,23 @@ class DetailPage extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const Divider(),
-            _buildInfoRow('Type', anime.type),
-            _buildInfoRow('Episodes', anime.episodes?.toString()),
-            _buildInfoRow('Rating', anime.rating),
-            _buildInfoRow('Status', anime.status),
-            _buildInfoRow('Year', anime.year?.toString()),
-            _buildInfoRow('Genres', anime.genres.join(', ')),
+            // _buildInfoRow('Type', product.type),
+            // _buildInfoRow('Episodes', product.episodes?.toString()),
+            // _buildInfoRow('Rating', product.rating),
+            // _buildInfoRow('Status', product.status),
+            // _buildInfoRow('Year', product.year?.toString()),
+            // _buildInfoRow('Genres', product.genres.join(', ')),
 
             const SizedBox(height: 20),
 
             // --- Sinopsis ---
             const Text(
-              'Synopsis',
+              'description',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const Divider(),
             Text(
-              anime.synopsis,
+              product.description,
               style: const TextStyle(fontSize: 16, height: 1.5),
             ),
           ],

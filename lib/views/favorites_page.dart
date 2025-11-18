@@ -19,14 +19,14 @@ class FavoritesPage extends StatelessWidget {
       body: favoriteController.favorites.isEmpty
           ? const Center(
               child: Text(
-                'No favorite anime added yet.',
+                'No favorite product added yet.',
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             )
           : ListView.builder(
               itemCount: favoriteController.favorites.length,
               itemBuilder: (context, index) {
-                final anime = favoriteController.favorites[index];
+                final product = favoriteController.favorites[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
                   child: Card( 
@@ -40,7 +40,7 @@ class FavoritesPage extends StatelessWidget {
                         width: 60,
                         height: 90,
                         child: CachedNetworkImage(
-                          imageUrl: anime.imageUrl,
+                          imageUrl: product.image,
                           fit: BoxFit.cover,
                           placeholder: (context, url) =>
                               const Center(child: CircularProgressIndicator()),
@@ -49,17 +49,17 @@ class FavoritesPage extends StatelessWidget {
                         ),
                       ),
                       title: Text(
-                        anime.title,
+                        product.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text('Score: ${anime.score.toStringAsFixed(2)}'),
+                      subtitle: Text('Score: ${product.rate!.toStringAsFixed(2)}'),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailPage(anime: anime),
+                            builder: (context) => DetailPage(product: product),
                           ),
                         );
                       },

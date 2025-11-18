@@ -3,7 +3,7 @@ import 'package:latres/views/register_page.dart';
 import 'package:provider/provider.dart';
 import 'services/hive_service.dart';
 import 'controllers/auth_controller.dart';
-import 'controllers/anime_controller.dart';
+import 'controllers/product_controller.dart';
 import 'controllers/favorite_controller.dart';
 import 'controllers/profile_controller.dart';
 import 'views/login_page.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           create: (_) => AuthController()..checkLoginStatus(),
         ), 
         ChangeNotifierProvider(
-          create: (_) => AnimeController()..fetchTopAnime(),
+          create: (_) => ProductController()..fetchTopProduct(),
         ),
         ChangeNotifierProvider(
           create: (_) => FavoriteController()..loadFavorites(),
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'MyAnime',
+        title: 'MyProduct',
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
