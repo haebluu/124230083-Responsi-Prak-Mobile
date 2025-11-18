@@ -11,7 +11,8 @@ class HiveService {
     }
   }
 
-  Future<Box<UserModel>> get userBox async => await Hive.openBox<UserModel>(_userBox);
+  Future<Box<UserModel>> get userBox async =>
+      await Hive.openBox<UserModel>(_userBox);
 
   Future<void> saveUser(UserModel user) async {
     final box = await userBox;

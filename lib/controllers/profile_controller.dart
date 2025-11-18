@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileController extends ChangeNotifier {
-  final String _imageAssetPath = 'assets/images/zahra.jpg'; 
+  final String _imageAssetPath = 'assets/images/zahra.jpg';
   String get imageAssetPath => _imageAssetPath;
 
   final String _staticName = 'Zahratun Nafiah';
@@ -9,7 +9,5 @@ class ProfileController extends ChangeNotifier {
   String get staticName => _staticName;
   String get staticNim => _staticNim;
 
-  Future<void> loadProfileImage() async {
-  }
-
+  Future<void> loadProfileImage() async {}
 }

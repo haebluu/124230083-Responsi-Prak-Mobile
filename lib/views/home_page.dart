@@ -118,8 +118,7 @@ class HomePage extends StatelessWidget {
                                             const Icon(Icons.star,
                                                 color: Colors.amber, size: 16),
                                             const SizedBox(width: 4),
-                                            Text(
-                                                product.rate as String,
+                                            Text(product.rate as String,
                                                 //.toStringAsFixed(2),
                                                 style: const TextStyle(
                                                     fontSize: 12)),

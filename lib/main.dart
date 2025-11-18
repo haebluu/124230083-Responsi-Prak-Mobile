@@ -14,12 +14,12 @@ import 'views/home_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService().init();
-  
-  runApp(const MyApp()); 
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); 
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => AuthController()..checkLoginStatus(),
-        ), 
+        ),
         ChangeNotifierProvider(
           create: (_) => ProductController()..fetchTopProduct(),
         ),
@@ -43,24 +43,22 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-
           appBarTheme: const AppBarTheme(
             titleTextStyle: TextStyle(
               color: Colors.white,
-              fontSize: 18, 
-              fontWeight: FontWeight.bold, 
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
             iconTheme: IconThemeData(
               color: Colors.white,
             ),
-            backgroundColor: Color.fromRGBO(206, 1, 88, 1), 
+            backgroundColor: Color.fromRGBO(206, 1, 88, 1),
           ),
-
         ),
         home: Consumer<AuthController>(
           builder: (context, auth, child) {
             if (auth.currentUsername == null) {
-              return const LoginPage(); 
+              return const LoginPage();
             }
             return const MainWrapper();
           },
@@ -84,7 +82,7 @@ class MainWrapper extends StatefulWidget {
 
 class _MainWrapperState extends State<MainWrapper> {
   int _selectedIndex = 0;
-  
+
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     FavoritesPage(),

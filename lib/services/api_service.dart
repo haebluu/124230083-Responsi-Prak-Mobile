@@ -23,32 +23,3 @@ class ApiService {
     }
   }
 }
-
-
-//   Future<List<ProductModel>> fetchTopProduct() async {
-//     try {
-//       final response = await _dio.get('$_baseUrl/products');
-
-//       ///top/Product
-//       if(response.statusCode == 200){
-//         final data = jsonDecode(response.body);
-//         List products = data['data'];
-//         return products.map((v) => ProductModel.fromJson(v)).toList();
-//       }else{
-//         throw Exception("Gagal Fetch Api");
-//       }
-//     //   if (response.statusCode == 200) {
-//     //     final List<dynamic> data = response.data; //['data']
-//     //     return data.map((json) => ProductModel.fromJson(json)).toList();
-//     //   } else {
-//     //     throw Exception('Failed to load top Product');
-//     //   }
-//     // } on DioException catch (e) {
-//     //   throw Exception('Failed to connect to API: ${e.message}');
-//     // } catch (e) {
-//     //   rethrow;
-//     }
-//   }
-// }
-
-

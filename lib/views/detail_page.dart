@@ -50,7 +50,10 @@ class DetailPage extends StatelessWidget {
                 fit: BoxFit.cover,
                 placeholder: (context, url) =>
                     const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => const Icon(Icons.broken_image, size: 300,),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.broken_image,
+                  size: 300,
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -58,30 +61,34 @@ class DetailPage extends StatelessWidget {
               product.title,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            if (product.price != null )
+            if (product.price != null)
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
                 child: Text(
                   product.price! as String,
-                  style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.grey),
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.grey),
                 ),
               ),
             const SizedBox(height: 10),
 
             // --- Score ---
-            Center( 
+            Center(
               child: Row(
-                mainAxisSize: MainAxisSize.min, 
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const Icon(Icons.star, color: Colors.amber, size: 26),
                   const SizedBox(width: 5),
                   Text(
-                    ' ${product.rate!.toStringAsFixed(2)}',
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ' ${product.rate!}',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
-            ), 
+            ),
             const SizedBox(height: 20),
 
             // --- Detail Tambahan ---
@@ -116,7 +123,8 @@ class DetailPage extends StatelessWidget {
   }
 
   Widget _buildInfoRow(String label, String? value) {
-    if (value == null || value.isEmpty || value == '0') return const SizedBox.shrink();
+    if (value == null || value.isEmpty || value == '0')
+      return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(

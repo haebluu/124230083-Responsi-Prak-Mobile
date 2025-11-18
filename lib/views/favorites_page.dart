@@ -28,14 +28,16 @@ class FavoritesPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final product = favoriteController.favorites[index];
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                  child: Card( 
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 5.0),
+                  child: Card(
                     elevation: 3,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0),
                       leading: SizedBox(
                         width: 60,
                         height: 90,
@@ -54,7 +56,7 @@ class FavoritesPage extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text('Score: ${product.rate!.toStringAsFixed(2)}'),
+                      subtitle: Text('Score: ${product.rate}'),
                       onTap: () {
                         Navigator.push(
                           context,
