@@ -14,7 +14,6 @@ class ApiService {
     final String fullUrl = '$_baseUrl/products';
     final response = await http.get(Uri.parse(fullUrl));
 
-    ///top/Product
     if (response.statusCode == 200) {
       final List products = jsonDecode(response.body);
       return products.map((v) => ProductModel.fromJson(v)).toList();

@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'services/hive_service.dart';
 import 'controllers/auth_controller.dart';
 import 'controllers/product_controller.dart';
-import 'controllers/favorite_controller.dart';
+import 'controllers/cart_controller.dart'; 
 import 'controllers/profile_controller.dart';
 import 'views/login_page.dart';
-import 'views/favorites_page.dart';
+import 'views/cart_page.dart'; 
 import 'views/profile_page.dart';
 import 'views/home_page.dart';
 
@@ -32,41 +32,25 @@ class MyApp extends StatelessWidget {
           create: (_) => ProductController()..fetchTopProduct(),
         ),
         ChangeNotifierProvider(
-          create: (_) => FavoriteController()..loadFavorites(),
+          create: (_) => CartController()..loadCart(), 
         ),
         ChangeNotifierProvider(
           create: (_) => ProfileController()..loadProfileImage(),
         ),
       ],
       child: MaterialApp(
-        title: 'MyProduct',
-        theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          appBarTheme: const AppBarTheme(
-            titleTextStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-            iconTheme: IconThemeData(
-              color: Colors.white,
-            ),
-            backgroundColor: Color.fromRGBO(206, 1, 88, 1),
-          ),
-        ),
         home: Consumer<AuthController>(
           builder: (context, auth, child) {
             if (auth.currentUsername == null) {
               return const LoginPage();
             }
-            return const MainWrapper();
+            return  MainWrapper();
           },
         ),
         routes: {
           '/login': (context) => const LoginPage(),
           '/register': (context) => const RegisterPage(),
-          '/home': (context) => const MainWrapper(),
+          '/home': (context) =>  MainWrapper(),
         },
       ),
     );
@@ -74,8 +58,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MainWrapper extends StatefulWidget {
-  const MainWrapper({super.key});
-
   @override
   State<MainWrapper> createState() => _MainWrapperState();
 }
@@ -85,7 +67,7 @@ class _MainWrapperState extends State<MainWrapper> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    FavoritesPage(),
+    CartPage(), 
     ProfilePage(),
   ];
 
@@ -108,8 +90,8 @@ class _MainWrapperState extends State<MainWrapper> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorite',
+            icon: Icon(Icons.shopping_cart), 
+            label: 'Cart', 
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

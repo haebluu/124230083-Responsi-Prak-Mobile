@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefService {
   static const String _sessionKey = 'sessionUsername';
-  static const String _favoritesKey = 'favoritesProduct';
+  static const String _cartKey = 'cartProduct'; 
   static const String _profileImageKey = 'profileImagePath';
 
   Future<void> saveSession(String username) async {
@@ -20,14 +20,14 @@ class SharedPrefService {
     await prefs.remove(_sessionKey);
   }
 
-  Future<List<String>> getFavorites() async {
+  Future<List<String>> getCart() async { 
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList(_favoritesKey) ?? [];
+    return prefs.getStringList(_cartKey) ?? [];
   }
 
-  Future<void> saveFavorites(List<String> favoritesJson) async {
+  Future<void> saveCart(List<String> cartJson) async { 
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(_favoritesKey, favoritesJson);
+    await prefs.setStringList(_cartKey, cartJson);
   }
 
   Future<void> saveProfileImagePath(String path) async {

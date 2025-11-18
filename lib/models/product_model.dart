@@ -18,14 +18,16 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    final ratingJson = json['rating'] as Map<String, dynamic>?;
+
     return ProductModel(
       id: int.tryParse(json['id'].toString()) ?? 0,
-      title: json['title'] ?? json['title'] ?? 'No Title',
-      price: double.tryParse(json['price'].toString()) ?? 0,
-      image: json['images']?['jpg']?['image'] ?? '',
-      description: json['description'] ?? 'Tidak ada deskripsi',
-      rate: double.tryParse(json['rate'].toString()) ?? 0,
-      count: int.tryParse(json['count'].toString()) ?? 0,
+      title: json['title'] as String? ?? 'No Title',
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      image: json['image'] as String? ?? '',
+      description: json['description'] as String? ?? 'Tidak ada deskripsi',
+      rate: (ratingJson?['rate'] as num?)?.toDouble() ?? 0.0,
+      count: ratingJson?['count'] as int? ?? 0,
     );
   }
 

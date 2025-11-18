@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'MyAnime',
+              'MyProduct',
               style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,

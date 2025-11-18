@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../controllers/favorite_controller.dart';
+import '../controllers/cart_controller.dart'; 
 import 'detail_page.dart';
 
-class FavoritesPage extends StatelessWidget {
-  const FavoritesPage({super.key});
+class CartPage extends StatelessWidget { 
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final favoriteController = Provider.of<FavoriteController>(context);
+    final cartController = Provider.of<CartController>(context); 
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Favorites'),
+        title: const Text('My Cart'), 
         backgroundColor: Color.fromRGBO(206, 1, 88, 1),
       ),
-      body: favoriteController.favorites.isEmpty
+      body: cartController.cart.isEmpty 
           ? const Center(
               child: Text(
-                'No favorite product added yet.',
+                'No items added to cart yet.', 
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             )
           : ListView.builder(
-              itemCount: favoriteController.favorites.length,
+              itemCount: cartController.cart.length,
               itemBuilder: (context, index) {
-                final product = favoriteController.favorites[index];
+                final product = cartController.cart[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 5.0),
@@ -56,7 +56,7 @@ class FavoritesPage extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text('Score: ${product.rate}'),
+                      subtitle: Text('Price: \$${product.price?.toStringAsFixed(2) ?? '-'}'), 
                       onTap: () {
                         Navigator.push(
                           context,

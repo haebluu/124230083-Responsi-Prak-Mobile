@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../controllers/product_controller.dart';
-import '../controllers/favorite_controller.dart';
+import '../controllers/cart_controller.dart'; 
 import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  void _showSnackBar(BuildContext context, bool isFavorite) {
+  void _showSnackBar(BuildContext context, bool isInCart) { 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content:
-            Text(isFavorite ? 'Removed from Favorites' : 'Added to Favorites'),
+            Text(isInCart ? 'Removed from Cart' : 'Added to Cart'),
         duration: const Duration(seconds: 1),
       ),
     );
@@ -30,11 +30,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productController =
-        Provider.of<ProductController>(context); //ini A besar
+        Provider.of<ProductController>(context); 
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Top product'),
+        title: const Text('Product'),
         backgroundColor: Color.fromRGBO(206, 1, 88, 1),
       ),
       body: productController.isLoading
@@ -48,18 +48,17 @@ class HomePage extends StatelessWidget {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio:
-                          0.65, // <-- Dikurangi menjadi 0.65 (tinggi lebih pendek)
+                          0.65, 
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                     ),
                     itemCount: productController.topProduct.length,
                     itemBuilder: (context, index) {
-                      final product = productController
-                          .topProduct[index]; //yang ada topnya itu Anya besar
-                      return Consumer<FavoriteController>(
-                        builder: (context, favoriteController, child) {
-                          final isFavorite =
-                              favoriteController.isFavorite(product.id);
+                      final product = productController.topProduct[index];
+                      return Consumer<CartController>( 
+                        builder: (context, cartController, child) { 
+                          final isInCart =
+                              cartController.isInCart(product.id); 
 
                           return Card(
                             elevation: 4,
@@ -72,7 +71,6 @@ class HomePage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
-                                  // Gambar Poster
                                   Expanded(
                                     flex: 4,
                                     child: ClipRRect(
@@ -94,14 +92,12 @@ class HomePage extends StatelessWidget {
                                     ),
                                   ),
 
-                                  // Detail product
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0, vertical: 8.0),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      // Gunakan MainAxisSize.min agar Column tidak mencoba mengisi tinggi Card
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
                                         Text(
@@ -115,27 +111,25 @@ class HomePage extends StatelessWidget {
                                         const SizedBox(height: 4),
                                         Row(
                                           children: [
-                                            const Icon(Icons.star,
-                                                color: Colors.amber, size: 16),
-                                            const SizedBox(width: 4),
-                                            Text(product.rate as String,
-                                                //.toStringAsFixed(2),
-                                                style: const TextStyle(
-                                                    fontSize: 12)),
+                                            Text(
+                                              '\$${product.price?.toStringAsFixed(2) ?? '-'}',
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color.fromRGBO(206, 1, 88, 1)), 
+                                            ),
                                             const Spacer(),
                                             GestureDetector(
                                               onTap: () {
-                                                favoriteController
-                                                    .toggleFavorite(product);
-                                                _showSnackBar(
-                                                    context, isFavorite);
+                                                cartController.toggleCartItem(product);
+                                                _showSnackBar(context, isInCart);
                                               },
                                               child: Icon(
-                                                isFavorite
-                                                    ? Icons.favorite
-                                                    : Icons.favorite_border,
-                                                color: isFavorite
-                                                    ? Colors.red
+                                                isInCart
+                                                    ? Icons.shopping_cart
+                                                    : Icons.shopping_cart_outlined,
+                                                color: isInCart
+                                                    ? Colors.orange
                                                     : Colors.grey,
                                                 size: 20,
                                               ),
@@ -143,10 +137,14 @@ class HomePage extends StatelessWidget {
                                           ],
                                         ),
                                         const SizedBox(height: 4),
-                                        Text(
-                                          'Type: ${product.price ?? '-'} | Count: ${product.count ?? '-'}',
-                                          style: const TextStyle(
-                                              fontSize: 10, color: Colors.grey),
+                                        Row(
+                                          children: [
+                                            const Icon(Icons.star, color: Colors.amber, size: 14),
+                                            const SizedBox(width: 4),
+                                            Text('${product.rate?.toStringAsFixed(1) ?? '-'} | Stock: ${product.count ?? '-'}',
+                                                style: const TextStyle(
+                                                    fontSize: 10, color: Colors.grey)),
+                                          ],
                                         ),
                                       ],
                                     ),
