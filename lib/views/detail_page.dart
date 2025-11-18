@@ -11,7 +11,7 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final favoriteController = Provider.of<FavoriteController>(context);
-    final isFavorite = favoriteController.isFavorite(product.malId);
+    final isFavorite = favoriteController.isFavorite(product.id);
 
     return Scaffold(
       appBar: AppBar(

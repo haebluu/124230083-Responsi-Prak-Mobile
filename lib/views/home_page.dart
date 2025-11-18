@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
                       return Consumer<FavoriteController>(
                         builder: (context, favoriteController, child) {
                           final isFavorite =
-                              favoriteController.isFavorite(product.malId);
+                              favoriteController.isFavorite(product.id);
 
                           return Card(
                             elevation: 4,

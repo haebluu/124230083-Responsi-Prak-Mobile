@@ -17,15 +17,15 @@ class FavoriteController extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isFavorite(int malId) {
-    return _favorites.any((Product) => Product.malId == malId);
+  bool isFavorite(int id) {
+    return _favorites.any((product) => product.id == id);
   }
 
-  Future<void> toggleFavorite(ProductModel Product) async {
-    if (isFavorite(Product.malId)) {
-      _favorites.removeWhere((item) => item.malId == Product.malId);
+  Future<void> toggleFavorite(ProductModel product) async {
+    if (isFavorite(product.id)) {
+      _favorites.removeWhere((item) => item.id == product.id);
     } else {
-      _favorites.add(Product);
+      _favorites.add(product);
     }
 
     await _saveFavorites();
